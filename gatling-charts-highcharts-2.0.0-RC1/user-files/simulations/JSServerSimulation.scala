@@ -176,6 +176,20 @@ class JSServerSimulation extends Simulation {
     		}
     	}
 
+	object get_rank_info_for_pvp {
+    		def msg( deviceid : String ) : String = {
+    			var cmd = Map[Any,Any]();
+    			cmd += ("msg_id"->22);
+    			cmd += ("flowid" -> 88888888);
+    			cmd += ("channel" -> "000023");
+    			cmd += ("version" -> "2.4.0");
+    			cmd += ("deviceid" -> deviceid);
+    			cmd += ("device_emui" -> deviceid);
+    			cmd += ("type" -> "get");
+    			return Json.build(cmd).toString;
+    		}
+    	}
+
 	object get_rival_for_pvp {
     		def msg( deviceid : String ) : String = {
     			var cmd = Map[Any,Any]();
@@ -287,6 +301,15 @@ class JSServerSimulation extends Simulation {
 				)
 			.pause(1 seconds)
 */
+			.feed(feeder)
+			.exec(
+                http("get_rank_info_for_pvp")
+                    .post("/")
+                    .formParam("token", "1234567788")
+                    .formParam("msg",get_rank_info_for_pvp.msg("""${id}"""))
+                    .check(status.is(200))
+				)
+			.pause(1 seconds)
 			.feed(feeder)
 			.exec(
                 http("get_rival_for_pvp")

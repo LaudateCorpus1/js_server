@@ -8,7 +8,7 @@
 		"generic-pool":"2.0.4",
 		"underscore": "~1.4.4",
 		"async":"0.9.0",
-        "nodemailer":"0.7.0",
+        "nodemailer":"6.9.8",
 		"log4js":"0.6.14",
         "getmac ":"1.0.6",
         "nodejieba ":"0.2.4"
